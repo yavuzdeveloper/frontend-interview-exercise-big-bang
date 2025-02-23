@@ -3,57 +3,56 @@ import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
 
 import automataLogo from "../assets/automata.png";
 import Game from "../components/game/Game";
-import "./App.css";
-import { Character } from "../types";
 import StartScreen from "../components/start-screen/StartScreen";
+import Toast from "../components/toast/Toast";
+import { Character } from "../types";
+import "./App.css";
 
 function App() {
-  // State variables to manage player name, selected opponent, number of rounds, and game status
-  const [playerName, setPlayerName] = useState<string>("");
-  const [opponent, setOpponent] = useState<Character>("" as Character);
-  const [rounds, setRounds] = useState<number>(3);
-  const [gameStarted, setGameStarted] = useState<boolean>(false);
+  const [gameState, setGameState] = useState({
+    playerName: "",
+    opponent: "" as Character,
+    rounds: 3,
+    gameStarted: false,
+  });
 
-  // Handler to update the player's name
-  const handlePlayerNameChange = (name: string) => {
-    setPlayerName(name);
+  const [toastMessage, setToastMessage] = useState("");
+
+  const handleGameStateChange = (
+    key: string,
+    value: string | number | boolean
+  ) => {
+    setGameState(prev => ({ ...prev, [key]: value }));
   };
 
-  // Handler to update the selected opponent
-  const handleOpponentChange = (opponent: string) => {
-    setOpponent(opponent as Character);
-  };
-
-  // Handler to update the number of rounds
-  const handleRoundsChange = (rounds: number) => {
-    setRounds(rounds);
-  };
-
-  // Function to start the game
   const onStart = () => {
-    // Check if the player name and opponent are selected
-    if (playerName === "" || opponent === ("" as Character)) {
-      alert("Please enter your name and select an opponent.");
+    const { playerName, opponent } = gameState;
+    if (!playerName || !opponent) {
+      setToastMessage("⚠️ Please ensure all required fields are filled in.");
       return;
     }
-    // If valid, set the game status to started
-    setGameStarted(true);
+    handleGameStateChange("gameStarted", true);
+  };
+
+  const onRestart = () => {
+    handleGameStateChange("gameStarted", false);
   };
 
   return (
     <BrowserRouter>
       <div className="App">
+        {toastMessage && (
+          <Toast message={toastMessage} onClose={() => setToastMessage("")} />
+        )}
         <Routes>
-          {/* Homepage (StartScreen) */}
           <Route
             path="/"
             element={
-              gameStarted ? (
-                // If the game has started, navigate to the game page
+              gameState.gameStarted ? (
                 <Navigate to="/game" replace />
               ) : (
                 <>
-                  {!gameStarted && (
+                  {!gameState.gameStarted && (
                     <a
                       href="https://automata.tech/"
                       target="_blank"
@@ -69,30 +68,25 @@ function App() {
                   <h2 className="game-title">
                     🪨 Rock 📄 Paper ✂️ Scissors 🦎 Lizard 🖖 Spock
                   </h2>
-
-                  {/* StartScreen component for player input */}
                   <StartScreen
                     onStart={onStart}
-                    handlePlayerNameChange={handlePlayerNameChange}
-                    handleOpponentChange={handleOpponentChange}
-                    playerName={playerName}
-                    opponent={opponent}
-                    rounds={rounds}
-                    handleRoundsChange={handleRoundsChange}
+                    handleGameStateChange={handleGameStateChange}
+                    playerName={gameState.playerName}
+                    opponent={gameState.opponent}
+                    rounds={gameState.rounds}
                   />
                 </>
               )
             }
           />
-          {/* Game page (Game) */}
           <Route
             path="/game"
             element={
               <Game
-                playerName={playerName}
-                opponent={opponent}
-                rounds={rounds}
-                onRestart={() => setGameStarted(false)} // Restart the game by resetting the game status
+                playerName={gameState.playerName}
+                opponent={gameState.opponent}
+                rounds={gameState.rounds}
+                onRestart={onRestart}
               />
             }
           />

@@ -1,17 +1,16 @@
 .Game {
   text-align: center;
-  padding: 20px;
 }
 
 .game-header {
   text-align: center;
-  margin-bottom: 20px;
+  margin-bottom: 10px;
 }
 
 .game-title {
   font-size: 1.5rem;
   color: #007bff;
-  margin-bottom: 10px;
+  margin-bottom: 5px;
 }
 
 .round-info {
@@ -28,14 +27,12 @@
   display: flex;
   justify-content: space-between;
   align-items: stretch;
-  gap: 10px;
-  margin-bottom: 20px;
 }
 
 .player,
 .middle-card {
   background-color: #f8f9fa;
-  padding: 10px;
+  padding: 5px;
   border-radius: 10px;
   width: 30%;
   transition: background-color 0.3s ease;
@@ -43,7 +40,7 @@
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  min-height: 120px;
+  min-height: 90px;
   box-sizing: border-box;
 }
 
@@ -80,7 +77,7 @@
 
 .choices button {
   margin: 5px;
-  padding: 10px 20px;
+  padding: 8px 20px;
   font-size: 16px;
   background-color: #007bff;
   color: white;
@@ -104,7 +101,7 @@ button:disabled {
 
 .result {
   margin: auto;
-  padding: 15px;
+  padding: 2px;
   background-color: #f8f9fa;
   border-radius: 10px;
   text-align: center;
@@ -136,7 +133,7 @@ button:disabled {
 }
 
 .restart-button {
-  padding: 10px 20px;
+  padding: 6px 20px;
   font-size: 16px;
   background-color: #28a745;
   color: white;
@@ -151,7 +148,7 @@ button:disabled {
 }
 
 .exit-button {
-  padding: 10px 20px;
+  padding: 6px 20px;
   font-size: 16px;
   background-color: #dc3545;
   color: white;
@@ -197,7 +194,7 @@ button:disabled {
   border: none;
   border-radius: 5px;
   cursor: pointer;
-  padding: 8px 16px;
+  padding: 6px 16px;
   transition: background-color 0.3s;
 }
 
