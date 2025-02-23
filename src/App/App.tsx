@@ -48,20 +48,28 @@ function App() {
           <Route
             path="/"
             element={
-              !gameStarted ? (
+              gameStarted ? (
+                // If the game has started, navigate to the game page
+                <Navigate to="/game" replace />
+              ) : (
                 <>
-                  {/* Automata logo with a link to their website */}
-                  <a
-                    href="https://automata.tech/"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                  >
-                    <img
-                      src={automataLogo}
-                      className="logo automata"
-                      alt="Automata logo"
-                    />
-                  </a>
+                  {!gameStarted && (
+                    <a
+                      href="https://automata.tech/"
+                      target="_blank"
+                      rel="noopener noreferrer"
+                    >
+                      <img
+                        src={automataLogo}
+                        className="logo automata"
+                        alt="Automata logo"
+                      />
+                    </a>
+                  )}
+                  <h2 className="game-title">
+                    🪨 Rock 📄 Paper ✂️ Scissors 🦎 Lizard 🖖 Spock
+                  </h2>
+
                   {/* StartScreen component for player input */}
                   <StartScreen
                     onStart={onStart}
@@ -73,9 +81,6 @@ function App() {
                     handleRoundsChange={handleRoundsChange}
                   />
                 </>
-              ) : (
-                // If the game has started, navigate to the game page
-                <Navigate to="/game" replace />
               )
             }
           />

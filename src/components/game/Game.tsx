@@ -207,8 +207,10 @@ const Game: React.FC<GameProps> = ({
 
   return (
     <div className="Game">
+      <h2 className="game-title">
+        🪨 Rock 📄 Paper ✂️ Scissors 🦎 Lizard 🖖 Spock
+      </h2>
       <div className="game-header">
-        <h2 className="game-title">Rock Paper Scissors Lizard Spock</h2>
         {winner && (
           <Confetti
             width={width}
@@ -225,6 +227,7 @@ const Game: React.FC<GameProps> = ({
           <div className="winner-card">
             <h3>Game Over!</h3>
             <p>
+              🏆{" "}
               {score.player > score.opponent
                 ? `${playerName} wins the game! 🎉`
                 : score.opponent > score.player
@@ -232,7 +235,7 @@ const Game: React.FC<GameProps> = ({
                 : "It's a tie game! 🤝"}
             </p>
             <button onClick={handleRestart} className="restart-button">
-              Play Again
+              🔄 Play Again
             </button>
           </div>
         ) : (
@@ -246,18 +249,24 @@ const Game: React.FC<GameProps> = ({
           className={`player ${result.includes(playerName) ? "winner" : ""}`}
         >
           <h2>{playerName}</h2>
-          <p>Score: {score.player}</p>
+          <p className="score-text">
+            🏆 Score: <span className="score-value">{score.player}</span>
+          </p>
         </div>
         {/* Display tie score */}
         <div
           className={`middle-card ${result === "It's a tie!" ? "tie-bg" : ""}`}
         >
           <h2>Tie</h2>
-          <p>Score: {score.tie}</p>
+          <p className="score-text">
+            🏆 Score: <span className="score-value">{score.tie}</span>
+          </p>
         </div>
         <div className={`player ${result.includes(opponent) ? "winner" : ""}`}>
           <h2>{opponent}</h2>
-          <p>Score: {score.opponent}</p>
+          <p className="score-text">
+            🏆 Score: <span className="score-value">{score.opponent}</span>
+          </p>
         </div>
       </div>
       <div className="choices">
@@ -267,11 +276,15 @@ const Game: React.FC<GameProps> = ({
             onClick={() => handlePlayerChoice(choice)}
             disabled={currentRound > totalRounds}
           >
+            {choice === "rock" && "🪨"}
+            {choice === "paper" && "📄"}
+            {choice === "scissors" && "✂️"}
+            {choice === "lizard" && "🦎"}
+            {choice === "spock" && "🖖"}{" "}
             {choice.charAt(0).toUpperCase() + choice.slice(1)}
           </button>
         ))}
       </div>
-
       {/* Display result and choices if both player and opponent have made a choice */}
       {playerChoice && opponentChoice && (
         <div
@@ -299,14 +312,13 @@ const Game: React.FC<GameProps> = ({
           </div>
         </div>
       )}
-
       {/* Action buttons for restarting or exiting the game */}
       <div className="action-buttons">
         <button onClick={handleRestart} className="restart-button">
-          Restart Game
+          🔄 Restart Game
         </button>
         <button onClick={handleExitGame} className="exit-button">
-          Exit Game
+          🚪 Exit Game
         </button>
       </div>
     </div>

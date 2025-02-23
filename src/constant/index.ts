@@ -1,5 +1,4 @@
 export const characters = [
-  "",
   "Mickey Mouse",
   "Donald Duck",
   "Goofy",

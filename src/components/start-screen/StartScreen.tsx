@@ -22,7 +22,6 @@ const StartScreen: React.FC<StartScreenProps> = ({
 }) => {
   return (
     <div className="start-screen">
-      <h2>Rock Paper Scissors Lizard Spock</h2>
       <div className="input-group">
         <label htmlFor="playerName">Your Name:</label>
         <input
@@ -39,7 +38,11 @@ const StartScreen: React.FC<StartScreenProps> = ({
           id="opponent"
           value={opponent}
           onChange={e => handleOpponentChange(e.target.value)}
+          className={!opponent ? "placeholder-selected" : ""}
         >
+          <option value="" disabled>
+            Select an opponent
+          </option>
           {characters.map(character => (
             <option key={character} value={character}>
               {character}
@@ -59,7 +62,7 @@ const StartScreen: React.FC<StartScreenProps> = ({
           placeholder="Enter number of rounds"
         />
       </div>
-      <button onClick={onStart}>Start Game</button>
+      <button onClick={onStart}>🚀 Start Game</button>
     </div>
   );
 };

@@ -1,9 +1,3 @@
-.App {
-  text-align: center;
-  padding: 20px;
-  font-family: Arial, sans-serif;
-}
-
 .start-screen {
   max-width: 400px;
   margin: 20px auto;
@@ -51,4 +45,16 @@ button {
 
 button:hover {
   background-color: #0056b3;
+}
+
+select.placeholder-selected {
+  color: gray;
+}
+
+select option {
+  color: black;
+}
+
+select option[value=""][disabled] {
+  color: gray;
 }
