@@ -1,12 +1,12 @@
 import { useState } from "react";
 import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
 
-import automataLogo from "../assets/automata.png";
 import Game from "../components/game/Game";
 import StartScreen from "../components/start-screen/StartScreen";
 import Toast from "../components/toast/Toast";
 import { Character } from "../types";
 import "./App.css";
+import Footer from "../components/footer/Footer";
 
 function App() {
   const [gameState, setGameState] = useState({
@@ -52,19 +52,6 @@ function App() {
                 <Navigate to="/game" replace />
               ) : (
                 <>
-                  {!gameState.gameStarted && (
-                    <a
-                      href="https://automata.tech/"
-                      target="_blank"
-                      rel="noopener noreferrer"
-                    >
-                      <img
-                        src={automataLogo}
-                        className="logo automata"
-                        alt="Automata logo"
-                      />
-                    </a>
-                  )}
                   <h2 className="game-title">
                     🪨 Rock 📄 Paper ✂️ Scissors 🦎 Lizard 🖖 Spock
                   </h2>
@@ -91,6 +78,7 @@ function App() {
             }
           />
         </Routes>
+        {gameState.gameStarted ? null : <Footer />}
       </div>
     </BrowserRouter>
   );
